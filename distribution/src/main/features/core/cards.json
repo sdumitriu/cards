@@ -22,6 +22,14 @@
             "start-order":"2"
         },
         {
+            "id":"${project.groupId}:cards-data-model-subjects-definition:${project.version}",
+            "start-order":"25"
+        },
+        {
+            "id":"${project.groupId}:cards-data-model-forms-definition:${project.version}",
+            "start-order":"25"
+        },
+        {
             "id":"io.uhndata.cards:cards-form-completion-status:${project.version}",
             "start-order":"25"
         },
