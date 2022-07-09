@@ -1,0 +1,56 @@
+{
+    "jcr:primaryType": "oak:QueryIndexDefinition",
+    "type": "lucene",
+    "compatVersion": 2,
+    "async": "async",
+    "evaluatePathRestrictions": true,
+    "includedPaths": ["/Clinics"],
+    "tags": ["cards"],
+    "indexRules" : {
+        "jcr:primaryType": "nt:unstructured",
+        "cards:Clinic" : {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "clinicName": {
+                    "analyzed": false,
+                    "boost": 200,
+                    "nodeScopeIndex": true,
+                    "useInExcerpt": false,
+                    "ordered": true,
+                    "propertyIndex": true
+                },
+                "displayName": {
+                    "analyzed": true,
+                    "boost": 100,
+                    "nodeScopeIndex": true,
+                    "useInExcerpt": true,
+                    "ordered": true,
+                    "propertyIndex": true
+                },
+                "survey": {
+                    "analyzed": false,
+                    "boost": 1,
+                    "nodeScopeIndex": false,
+                    "useInExcerpt": false,
+                    "ordered": false,
+                    "propertyIndex": true
+                },
+                "created": {
+                    "name": "jcr:created",
+                    "ordered": true,
+                    "propertyIndex": true,
+                    "nodeScopeIndex": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "lastModified": {
+                    "name": "jcr:lastModified",
+                    "ordered": true,
+                    "propertyIndex": true,
+                    "nodeScopeIndex": false,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        }
+    }
+}

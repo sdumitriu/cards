@@ -1,0 +1,7 @@
+{
+  "jcr:primaryType": "cards:Extension",
+  "cards:extensionPointId": "cards/coreUI/dashboardmenuitems/entry",
+  "cards:extensionName": "Questionnaire",
+  "cards:extensionRenderURL": "asset:cards-dataentry.NewFormDialog.js",
+  "cards:defaultOrder": 2
+}

@@ -42,6 +42,7 @@
             <Sling-Nodetypes>SLING-INF/nodetypes/proms.cnd</Sling-Nodetypes>
             <Include-Resource>{maven-resources},src/main/media</Include-Resource>
             <Sling-Initial-Content>
+              SLING-INF/content/Clinics/;path:=/Clinics;overwriteProperties:=true;uninstall:=true,
               SLING-INF/content/Extensions/;path:=/Extensions;overwriteProperties:=true;uninstall:=true,
               SLING-INF/content/Homepage/Proms.json;path:=/Proms;overwrite:=true,
               SLING-INF/content/Homepage/Proms/Cardio.xml;path:=/Proms/Cardio;overwrite:=true,

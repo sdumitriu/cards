@@ -1,0 +1,7 @@
+{
+  "jcr:primaryType": "cards:ClinicsHomepage",
+  "security:acl": [
+    { "principal": "everyone", "granted": ["jcr:read"] },
+    { "principal": "anonymous", "granted": ["jcr:read"] }
+  ]
+}

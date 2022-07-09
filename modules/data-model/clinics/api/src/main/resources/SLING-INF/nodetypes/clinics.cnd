@@ -1,0 +1,84 @@
+//
+//  Licensed to the Apache Software Foundation (ASF) under one
+//  or more contributor license agreements.  See the NOTICE file
+//  distributed with this work for additional information
+//  regarding copyright ownership.  The ASF licenses this file
+//  to you under the Apache License, Version 2.0 (the
+//  "License"); you may not use this file except in compliance
+//  with the License.  You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing,
+//  software distributed under the License is distributed on an
+//  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+//  KIND, either express or implied.  See the License for the
+//  specific language governing permissions and limitations
+//  under the License.
+//
+
+<sling = 'http://sling.apache.org/jcr/sling/1.0'>
+<cards = 'https://cards.uhndata.io/'>
+
+//-----------------------------------------------------------------------------
+//
+// Clinics: a private sub-division of the dataspace
+//
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+// A clinic binds together a group of users (clinicians),
+// a survey to be filled in by/for patients of the clinic,
+// and the forms answering those surveys.
+[cards:Clinic] > sling:Folder
+  // Attributes:
+
+  // We can use this clinic in a query.
+  query
+
+  // Properties
+
+  // Hardcode the resource type.
+  - sling:resourceType (STRING) = "cards/Clinic" mandatory autocreated protected
+
+  // Hardcode the resource supertype.
+  - sling:resourceSuperType (STRING) = "cards/Resource" mandatory autocreated protected
+
+  // The internal clinic name
+  - clinicName (String) mandatory
+
+  // The name to display to users
+  - displayName (String) mandatory
+
+  // An emergency contact for the clinic
+  - emergencyContact (string)
+
+  // The survey to use for this clinic
+  - survey (String) mandatory
+
+  // If TRUE, emails can always be sent to patients, ignoring any explicit email consent or lack of it
+  - ignoreEmailConsent (boolean)
+
+//-----------------------------------------------------------------------------
+// The homepage for all clinics.
+[cards:ClinicsHomepage] > sling:Folder
+  // Attributes:
+
+  // We can use this homepage in a query.
+  query
+
+  // Properties
+
+  // Hardcode the resource type.
+  - sling:resourceType (STRING) = "cards/ClinicsHomepage" mandatory autocreated protected
+
+  // Hardcode the resource supertype. ResourceHomepage is used to allow the children to be queried
+  // with the pagination servlet.
+  - sling:resourceSuperType (STRING) = "cards/ResourceHomepage" mandatory autocreated protected
+
+  - childNodeType (String) = "cards:Clinic" mandatory autocreated
+
+  // Children
+
+  // The list of clinics
+  + * (cards:Clinic) = cards:Clinic

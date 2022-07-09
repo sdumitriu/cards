@@ -1,0 +1,315 @@
+{
+    "jcr:primaryType": "oak:QueryIndexDefinition",
+    "type": "lucene",
+    "compatVersion": 2,
+    "async": "async",
+    "evaluatePathRestrictions": true,
+    "includedPaths": ["/Forms"],
+    "tags": ["cards"],
+    "indexRules" : {
+        "jcr:primaryType": "nt:unstructured",
+        "cards:BooleanAnswer": {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "question": {
+                    "name": "question",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "value": {
+                    "name": "value",
+                    "propertyIndex": true,
+                    "type": "Long",
+                    "analyzed": true,
+                    "notNullCheckEnabled": true,
+                    "nullCheckEnabled": true,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        },
+        "cards:TextAnswer": {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "question": {
+                    "name": "question",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "value": {
+                    "name": "value",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": true,
+                    "notNullCheckEnabled": true,
+                    "nullCheckEnabled": true,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        },
+        "cards:LongAnswer": {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "question": {
+                    "name": "question",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "value": {
+                    "name": "value",
+                    "propertyIndex": true,
+                    "type": "Long",
+                    "analyzed": true,
+                    "notNullCheckEnabled": true,
+                    "nullCheckEnabled": true,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        },
+        "cards:DoubleAnswer": {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "question": {
+                    "name": "question",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "value": {
+                    "name": "value",
+                    "propertyIndex": true,
+                    "type": "Double",
+                    "analyzed": true,
+                    "notNullCheckEnabled": true,
+                    "nullCheckEnabled": true,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        },
+        "cards:DecimalAnswer": {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "question": {
+                    "name": "question",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "value": {
+                    "name": "value",
+                    "propertyIndex": true,
+                    "type": "Decimal",
+                    "analyzed": true,
+                    "notNullCheckEnabled": true,
+                    "nullCheckEnabled": true,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        },
+        "cards:DateAnswer": {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "question": {
+                    "name": "question",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "value": {
+                    "name": "value",
+                    "propertyIndex": true,
+                    "type": "Date",
+                    "analyzed": true,
+                    "notNullCheckEnabled": true,
+                    "nullCheckEnabled": true,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        },
+        "cards:TimeAnswer": {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "question": {
+                    "name": "question",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "value": {
+                    "name": "value",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": true,
+                    "notNullCheckEnabled": true,
+                    "nullCheckEnabled": true,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        },
+        "cards:PedigreeAnswer": {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "question": {
+                    "name": "question",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "value": {
+                    "name": "value",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": true,
+                    "notNullCheckEnabled": true,
+                    "nullCheckEnabled": true,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        },
+        "cards:VocabularyAnswer": {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "question": {
+                    "name": "question",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "value": {
+                    "name": "value",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": true,
+                    "notNullCheckEnabled": true,
+                    "nullCheckEnabled": true,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        },
+        "cards:FileAnswer": {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "question": {
+                    "name": "question",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "value": {
+                    "name": "value",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": true,
+                    "notNullCheckEnabled": true,
+                    "nullCheckEnabled": true,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        },
+        "cards:ChromosomeAnswer": {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "question": {
+                    "name": "question",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "value": {
+                    "name": "value",
+                    "propertyIndex": true,
+                    "type": "String",
+                    "analyzed": true,
+                    "notNullCheckEnabled": true,
+                    "nullCheckEnabled": true,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        },
+        "cards:Form" : {
+            "jcr:primaryType": "nt:unstructured",
+            "properties": {
+                "jcr:primaryType": "nt:unstructured",
+                "questionnaire": {
+                    "analyzed": false,
+                    "boost": 1,
+                    "nodeScopeIndex": false,
+                    "useInExcerpt": true,
+                    "ordered": true,
+                    "propertyIndex": true
+                },
+                "subject": {
+                    "analyzed": false,
+                    "boost": 1,
+                    "nodeScopeIndex": false,
+                    "useInExcerpt": true,
+                    "ordered": true,
+                    "propertyIndex": true
+                },
+                "relatedSubjects": {
+                    "analyzed": false,
+                    "boost": 1,
+                    "nodeScopeIndex": false,
+                    "useInExcerpt": true,
+                    "ordered": false,
+                    "propertyIndex": true
+                },
+                "created": {
+                    "name": "jcr:created",
+                    "ordered": true,
+                    "propertyIndex": true,
+                    "nodeScopeIndex": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "lastModified": {
+                    "name": "jcr:lastModified",
+                    "ordered": true,
+                    "propertyIndex": true,
+                    "nodeScopeIndex": false,
+                    "jcr:primaryType": "nt:unstructured"
+                },
+                "statusFlags": {
+                    "name": "statusFlags",
+                    "propertyIndex": true,
+                    "nodeScopeIndex": false,
+                    "analyzed": false,
+                    "jcr:primaryType": "nt:unstructured"
+                }
+            }
+        }
+    },
+    "aggregates" : {
+        "jcr:primaryType": "nt:unstructured",
+        "cards:Form" : {
+            "jcr:primaryType": "nt:unstructured",
+            "include0": {
+                "jcr:primaryType": "nt:unstructured",
+                "path": "*"
+            }
+        }
+    }
+}

@@ -22,18 +22,37 @@
 
   <parent>
     <groupId>io.uhndata.cards</groupId>
-    <artifactId>cards-modules</artifactId>
+    <artifactId>cards-data-model-questionnaireSets</artifactId>
     <version>0.9-SNAPSHOT</version>
   </parent>
 
-  <artifactId>cards-data-model</artifactId>
-  <packaging>pom</packaging>
-  <name>CARDS Data Model elements</name>
+  <artifactId>cards-data-model-questionnaireSets-api</artifactId>
+  <packaging>bundle</packaging>
+  <name>CARDS - Data model - Questionnaire Sets - Definitions, APIs and SPIs</name>
 
-  <modules>
-    <module>forms</module>
-    <module>subjects</module>
-    <module>questionnaireSets</module>
-    <module>clinics</module>
-  </modules>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Include-Resource>{maven-resources}</Include-Resource>
+            <Sling-Nodetypes>SLING-INF/nodetypes/questionnaireSets.cnd</Sling-Nodetypes>
+            <Sling-Initial-Content>
+              SLING-INF/content/oak%3Aindex/;path:=/oak:index/;overwriteProperties:=true;uninstall:=true
+            </Sling-Initial-Content>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>javax.jcr</groupId>
+      <artifactId>jcr</artifactId>
+    </dependency>
+  </dependencies>
 </project>

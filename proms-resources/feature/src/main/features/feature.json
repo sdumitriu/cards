@@ -26,6 +26,14 @@
       "start-order":"21"
     },
     {
+      "id":"${project.groupId}:cards-data-model-clinics-api:${project.version}",
+      "start-order":"20"
+    },
+    {
+      "id":"${project.groupId}:cards-data-model-clinics-impl:${project.version}",
+      "start-order":"20"
+    },
+    {
       "id":"${project.groupId}:proms-resources-clinical-data:${project.version}",
       "start-order":"26"
     },
