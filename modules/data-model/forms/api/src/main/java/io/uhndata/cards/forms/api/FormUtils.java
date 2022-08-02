@@ -16,6 +16,8 @@
  */
 package io.uhndata.cards.forms.api;
 
+import java.util.EnumSet;
+
 import javax.jcr.Node;
 
 import org.apache.jackrabbit.oak.spi.state.NodeBuilder;
@@ -41,6 +43,9 @@ public interface FormUtils
 
     /** The name of the property of a Form node that links to the Subject the form belongs to. */
     String SUBJECT_PROPERTY = "subject";
+
+    /** The name of the property of a Form node that links to other Subjects the form relates to. */
+    String RELATED_SUBJECTS_PROPERTY = "relatedSubjects";
 
     /**
      * The primary node type for an Answer Section, a group of related answers and subsections in a Form, corresponding
@@ -69,6 +74,15 @@ public interface FormUtils
 
     /** The name of the property of an Answer node that holds the actual value. */
     String VALUE_PROPERTY = "value";
+
+    enum SearchType
+    {
+        FORM,
+        SUBJECT_FORMS,
+        SUBJECT_RELATED_FORMS,
+        ANCESTORS,
+        DESCENDANTS
+    }
 
     // Form methods
 
@@ -279,6 +293,17 @@ public interface FormUtils
      * @return an Answer node, may be {@code null}
      */
     Node getAnswer(Node form, Node question);
+
+    /**
+     * Get all the answers for a specific question, if any.
+     *
+     * @param form a Form node
+     * @param question a question node, part of the questionnaire that the form is answering
+     * @return a series of Answer nodes, may be empty list
+     */
+    Iterable<Node> getAllAnswers(Node form, Node question);
+
+    Iterable<Node> findAllRelatedAnswers(Node startingForm, Node question, EnumSet<SearchType> scope);
 
     /**
      * Check if the given node is an Answer node.
