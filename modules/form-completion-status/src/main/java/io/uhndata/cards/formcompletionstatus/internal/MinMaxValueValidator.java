@@ -43,45 +43,29 @@ public class MinMaxValueValidator implements AnswerValidator
     }
 
     @Override
-    @SuppressWarnings({ "checkstyle:CyclomaticComplexity", "checkstyle:NPathComplexity" })
-    public void validate(NodeBuilder answer, Node question, boolean initialAnswer, Map<String, Boolean> flags)
+    public void validate(final NodeBuilder answer, final Node question, final boolean initialAnswer,
+        final Map<String, Boolean> flags)
     {
         try {
-            final double minAnswers =
-                question.hasProperty("minValue") ? question.getProperty("minValue").getDouble() : Double.NaN;
-            final double maxAnswers =
-                question.hasProperty("maxValue") ? question.getProperty("maxValue").getDouble() : Double.NaN;
-            if (minAnswers == Double.NaN && maxAnswers == Double.NaN) {
-                return;
-            }
+            if (answer.hasProperty(PROP_VALUE)) {
+                final double minValue =
+                    question.hasProperty("minValue") ? question.getProperty("minValue").getDouble() : Double.NaN;
+                final double maxValue =
+                    question.hasProperty("maxValue") ? question.getProperty("maxValue").getDouble() : Double.NaN;
 
-            final PropertyState answerProp = answer.getProperty(PROP_VALUE);
-            if (answerProp == null) {
-                return;
-            }
-            // if any value is out of range, set FLAG_INVALID to true
-            if (answerProp.isArray()) {
+                final PropertyState answerProp = answer.getProperty(PROP_VALUE);
+                // if any value is out of range, set FLAG_INVALID to true
                 for (int i = 0; i < answerProp.count(); i++) {
-                    Double value = answerProp.getValue(Type.DOUBLE, i);
-                    if (minAnswers != Double.NaN && value < minAnswers
-                        || maxAnswers != Double.NaN && value > maxAnswers) {
+                    final Double value = answerProp.getValue(Type.DOUBLE, i);
+                    if (minValue != Double.NaN && value < minValue
+                        || maxValue != Double.NaN && value > maxValue) {
                         flags.put(FLAG_INVALID, true);
                         break;
                     }
                 }
-            } else {
-                Double value = answerProp.getValue(Type.DOUBLE);
-                if (minAnswers != Double.NaN && value < minAnswers || maxAnswers != Double.NaN && value > maxAnswers) {
-                    flags.put(FLAG_INVALID, true);
-                }
             }
-            // if the current entry in the map is still false, remove it
-            if (!flags.get(FLAG_INVALID)) {
-                flags.remove(FLAG_INVALID);
-            }
-            if (!flags.get(FLAG_INCOMPLETE)) {
-                flags.remove(FLAG_INCOMPLETE);
-            }
+            // If the INVALID flag has not been explicitly set so far, remove it
+            removeIfNotExplicitlySet(FLAG_INVALID, flags);
         } catch (final RepositoryException ex) {
             // If something goes wrong do nothing
         }
