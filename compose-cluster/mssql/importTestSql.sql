@@ -36,7 +36,8 @@ CREATE TABLE [path].[CL_EP_IP_EMAIL_CONSENT_IN_LAST_7_DAYS] (
     DISCH_DEPT_NAME varchar(254) NULL,
     DISCH_LOC_NAME varchar(254) NULL,
     EMAIL_CONSENT_YN varchar(3),
-    LoadTime datetime2 NULL
+    LoadTime datetime2 NULL,
+    DX_NAME varchar(255) NULL,
 );
 
 -- Insert test data
