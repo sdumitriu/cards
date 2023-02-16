@@ -21,11 +21,14 @@ package io.uhndata.cards.prems.internal.importer;
 
 import java.util.Map;
 
+import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.metatype.annotations.AttributeDefinition;
 import org.osgi.service.metatype.annotations.Designate;
 import org.osgi.service.metatype.annotations.ObjectClassDefinition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.uhndata.cards.clarity.importer.spi.ClarityDataProcessor;
 
@@ -38,10 +41,12 @@ import io.uhndata.cards.clarity.importer.spi.ClarityDataProcessor;
 @Component
 public class ConfiguredCohortMapper extends AbstractConditionalClarityDataProcessor implements ClarityDataProcessor
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConfiguredCohortMapper.class);
+
     @ObjectClassDefinition(name = "Clarity import filter - Cohort mapping conditions",
-    description = "Configuration for the Clarity importer to map visits matching these conditions to a specified"
-        + " cohort")
-    public static @interface Config
+        description = "Configuration for the Clarity importer to map visits matching these conditions to a specified"
+            + " cohort")
+    public @interface Config
     {
         @AttributeDefinition(name = "Priority", description = "Clarity Data Processor priority."
             + " Processors are run in ascending priority order")
@@ -62,15 +67,21 @@ public class ConfiguredCohortMapper extends AbstractConditionalClarityDataProces
                 + "\n - Unary operators 'is empty' and 'is not empty'"
                 + "\nFor example \"COLUMN_NAME is empty\".")
         String[] conditions();
+
+        @AttributeDefinition
+        String service_pid();
     }
 
     private final String cohort;
 
     @Activate
-    public ConfiguredCohortMapper(Config configuration)
+    public ConfiguredCohortMapper(Config configuration, ComponentContext context)
     {
         super(configuration.priority(), configuration.conditions());
         this.cohort = configuration.clinic();
+        LOGGER.error("Activated {} / {}", configuration.service_pid(), context.getProperties());
+        context.getProperties().keys().asIterator()
+            .forEachRemaining(k -> LOGGER.error("{} = {}", k, context.getProperties().get(k)));
     }
 
     @Override
