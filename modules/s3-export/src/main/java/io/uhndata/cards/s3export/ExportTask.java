@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package io.uhndata.cards.heracles.internal.export;
+package io.uhndata.cards.s3export;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -66,6 +66,8 @@ public class ExportTask implements Runnable
 
     private final ThreadResourceResolverProvider rrp;
 
+    private final ExportConfigDefinition config;
+
     private final String exportRunMode;
 
     private final LocalDate exportLowerBound;
@@ -73,17 +75,18 @@ public class ExportTask implements Runnable
     private final LocalDate exportUpperBound;
 
     ExportTask(final ResourceResolverFactory resolverFactory, final ThreadResourceResolverProvider rrp,
-        final String exportRunMode)
+        final ExportConfigDefinition config, final String exportRunMode)
     {
-        this(resolverFactory, rrp, exportRunMode, null, null);
+        this(resolverFactory, rrp, config, exportRunMode, null, null);
     }
 
     ExportTask(final ResourceResolverFactory resolverFactory, final ThreadResourceResolverProvider rrp,
-        final String exportRunMode,
+        final ExportConfigDefinition config, final String exportRunMode,
         final LocalDate exportLowerBound, final LocalDate exportUpperBound)
     {
         this.resolverFactory = resolverFactory;
         this.rrp = rrp;
+        this.config = config;
         this.exportRunMode = exportRunMode;
         this.exportLowerBound = exportLowerBound;
         this.exportUpperBound = exportUpperBound;
@@ -93,8 +96,8 @@ public class ExportTask implements Runnable
     public void run()
     {
         try {
-            if ("nightly".equals(this.exportRunMode) || "manualToday".equals(this.exportRunMode)) {
-                doNightlyExport();
+            if ("scheduled".equals(this.exportRunMode) || "manualToday".equals(this.exportRunMode)) {
+                doScheduledExport();
             } else if ("manualAfter".equals(this.exportRunMode)) {
                 doManualExport(this.exportLowerBound, null);
             } else if ("manualBetween".equals(this.exportRunMode)) {
@@ -151,9 +154,9 @@ public class ExportTask implements Runnable
         }
     }
 
-    public void doNightlyExport() throws LoginException
+    public void doScheduledExport() throws LoginException
     {
-        LOGGER.info("Executing NightlyExport");
+        LOGGER.info("Executing ScheduledExport");
         ZonedDateTime yesterday = LocalDate.now().atStartOfDay(ZoneId.systemDefault()).minusDays(1);
         String fileDateString = yesterday.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String startDateString = yesterday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSxxx"));
@@ -329,11 +332,11 @@ public class ExportTask implements Runnable
 
     private void output(SubjectContents input, String filename)
     {
-        final String s3EndpointUrl = System.getenv("S3_ENDPOINT_URL");
-        final String s3EndpointRegion = System.getenv("S3_ENDPOINT_REGION");
-        final String s3BucketName = System.getenv("S3_BUCKET_NAME");
-        final String awsKey = System.getenv("AWS_KEY");
-        final String awsSecret = System.getenv("AWS_SECRET");
+        final String s3EndpointUrl = env(this.config.endpoint());
+        final String s3EndpointRegion = env(this.config.region());
+        final String s3BucketName = env(this.config.bucket());
+        final String awsKey = env(this.config.accessKey());
+        final String awsSecret = env(this.config.secretKey());
         final EndpointConfiguration endpointConfig =
             new EndpointConfiguration(s3EndpointUrl, s3EndpointRegion);
         final AWSCredentials credentials = new BasicAWSCredentials(awsKey, awsSecret);
@@ -353,5 +356,13 @@ public class ExportTask implements Runnable
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    private String env(final String value)
+    {
+        if (value != null && value.startsWith("%ENV%")) {
+            return System.getenv(value.substring("%ENV%".length()));
+        }
+        return value;
     }
 }
